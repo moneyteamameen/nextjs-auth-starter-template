@@ -23,6 +23,27 @@ body {
     linear-gradient(to right, rgba(242, 245, 249, 0.7) 0%, rgba(242, 245, 249, 0.7) 100%);
 }
 
+.gridline-background {
+  background-color: #FFFFFF;
+  background-image: 
+    /* Primary grid */
+    linear-gradient(rgba(220, 220, 220, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220, 220, 220, 0.2) 1px, transparent 1px),
+    /* Secondary wider grid */
+    linear-gradient(rgba(200, 200, 200, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 200, 200, 0.1) 1px, transparent 1px);
+  background-size: 
+    250px 250px,
+    250px 250px,
+    500px 500px,
+    500px 500px;
+  background-position:
+    -10px -10px,
+    -10px -10px,
+    -25px -25px,
+    -25px -25px;
+}
+
 .mask {
   mask-image: linear-gradient(
     to bottom,

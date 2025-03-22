@@ -11,7 +11,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   
   return (
-    <div>
+    <div className="gridline-background h-screen overflow-y-auto">
       <Header />
       <main className="p-6">{children}</main>
     </div>

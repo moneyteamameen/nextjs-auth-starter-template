@@ -177,7 +177,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="bg-background-primary h-screen text-text-primary overflow-y-auto">
+    <div className="bg-background-primary gridline-background h-screen text-text-primary overflow-y-auto">
       <Header />
       <div className="max-w-7xl mx-auto px-4 pt-12 pb-20">
         {/* Dashboard Header */}
