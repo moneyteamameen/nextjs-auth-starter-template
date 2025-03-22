@@ -1,83 +1,85 @@
-<p align="center">
-  <a href="https://go.clerk.com/e3UDpP4" target="_blank" rel="noopener noreferrer">
-   <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="./public/light-logo.png">
-      <img src="./public/dark-logo.png" height="64">
-    </picture>
-  </a>
-  <br />
-</p>
-<div align="center">
-  <h1>
-    Next.js Clerk auth starter template
-  </h1>
-  <a href="https://www.npmjs.com/package/@clerk/clerk-js">
-    <img alt="" src="https://img.shields.io/npm/dm/@clerk/clerk-js" />
-  </a>
-  <a href="https://discord.com/invite/b5rXHjAg7A">
-    <img alt="Discord" src="https://img.shields.io/discord/856971667393609759?color=7389D8&label&logo=discord&logoColor=ffffff" />
-  </a>
-  <a href="https://twitter.com/clerkdev">
-    <img alt="Twitter" src="https://img.shields.io/twitter/url.svg?label=%40clerkdev&style=social&url=https%3A%2F%2Ftwitter.com%2Fclerkdev" />
-  </a>
-  <br />
-  <br />
-  <img alt="Clerk Hero Image" src="public/og.png">
-</div>
+# Document Analysis with OpenAI
 
-## Introduction
+This application allows users to upload documents, convert them to markdown, and analyze them using OpenAI's language models. It provides a user-friendly interface for document analysis with features like:
 
-Clerk is a developer-first authentication and user management solution. It provides pre-built React components and hooks for sign-in, sign-up, user profile, and organization management. Clerk is designed to be easy to use and customize, and can be dropped into any React or Next.js application.
+- Document upload and conversion
+- Multiple analysis templates (Summary, Key Points, Question Answering, etc.)
+- Support for different OpenAI models (GPT-3.5 Turbo, GPT-4o Mini, GPT-4o)
+- Follow-up questions to create a prompt chain
+- Cost estimation for API usage
 
-This template allows you to get started with Clerk and Next.js (App Router) in a matter of minutes, and demonstrates features of Clerk such as:
+## Features
 
-- Fully functional auth flow with sign-in, sign-up, and a protected page
-- Customized Clerk components with Tailwind CSS
-- Hooks for accessing user data and authentication state
-- Organizations for multi-tenant applications
+### Document Management
+- Upload documents and convert them to markdown
+- Download converted markdown files
+- Calculate token counts for OpenAI API usage
 
-## Demo
+### Document Analysis
+- Analyze documents using different templates:
+  - Summary generation
+  - Key points extraction
+  - Question answering
+  - Sentiment analysis
+  - Custom analysis with your own prompts
+- Ask follow-up questions to refine the analysis
+- View the prompt chain to understand the conversation flow
 
-A hosted demo of this example is available at https://clerk-nextjs-app-router.vercel.app/
+## Setup
 
-## Deploy
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Create a `.env.local` file with your API keys:
+   ```
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+   CLERK_SECRET_KEY=your_clerk_secret_key
+   OPENAI_API_KEY=your_openai_api_key
+   ```
+4. Run the development server:
+   ```
+   npm run dev
+   ```
 
-Easily deploy the template to Vercel with the button below. You will need to set the required environment variables in the Vercel dashboard.
+## Environment Setup
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fclerk%2Fnextjs-auth-starter-template&env=CLERK_SECRET_KEY,NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY&envDescription=Your%20Clerk%20application%20keys%2C%20accessible%20from%20dashboard.clerk.com.&envLink=https%3A%2F%2Fgithub.com%2Fclerk%2Fnextjs-auth-starter-template%3Ftab%3Dreadme-ov-file%23running-the-template&demo-url=https%3A%2F%2Fnextjs-auth-starter-template-kit.vercel.app%2F)
+This application is designed to work in an Anaconda environment. To set up:
 
-## Running the template
+1. Create a new Anaconda environment:
+   ```
+   conda create -n document-analysis python=3.10
+   ```
+2. Activate the environment:
+   ```
+   conda activate document-analysis
+   ```
+3. Install required Python packages:
+   ```
+   pip install openai
+   ```
 
-```bash
-git clone https://github.com/clerk/clerk-nextjs-demo-app-router
-```
+## Technologies Used
 
-To run the example locally, you need to:
+- Next.js (App Router)
+- React
+- Clerk for authentication
+- OpenAI API for document analysis
+- Tailwind CSS for styling
 
-1. Sign up for a Clerk account at [https://clerk.com](https://go.clerk.com/31bREJU).
-2. Go to the [Clerk dashboard](https://go.clerk.com/4I5LXFj) and create an application.
-3. Set the required Clerk environment variables as shown in [the example `env` file](./.env.example).
-4. Go to "Organization Settings" in your sidebar and enable Organizations
-5. `npm install` the required dependencies.
-6. `npm run dev` to launch the development server.
+## API Routes
 
-## Learn more
+- `/api/convert`: Converts uploaded documents to markdown
+- `/api/analyze`: Analyzes documents using OpenAI models
 
-To learn more about Clerk and Next.js, check out the following resources:
+## Token Handling
 
-- [Quickstart: Get started with Next.js and Clerk](https://go.clerk.com/vgWhQ7B)
-- [Clerk Documentation](https://go.clerk.com/aNiTioa)
-- [Next.js Documentation](https://nextjs.org/docs)
+The application includes smart token handling to manage large documents:
+- Automatically truncates documents that exceed model token limits
+- Provides token count and cost estimation
+- Handles different model token limits appropriately
 
-## Found an issue or have feedback?
+## License
 
-If you have found an issue with this repo or have feedback, please join our Discord and create a new thread inside of our [support](https://clerk.com/discord) channel.
-
-If it's a quick fix, such as a misspelled word or a broken link, feel free to skip creating a thread.
-Go ahead and create a [pull request](https://github.com/clerk/clerk-nextjs-demo-app-router/pulls) with the solution. :rocket:
-
-## Connect with us
-
-You can discuss ideas, ask questions, and meet others from the community in our [Discord](https://clerk.com/discord).
-
-If you prefer, you can also find support through our [Twitter](https://twitter.com/ClerkDev), or you can [email](mailto:support@clerk.dev) us!
+This project is licensed under the MIT License.

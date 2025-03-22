@@ -1,26 +1,16 @@
-import { ClerkProvider } from "@clerk/nextjs";
-import "./globals.css";
-import Script from "next/script";
-import { Metadata } from "next";
-import localFont from "next/font/local";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
+import { AuthProvider } from './context/auth-context';
+import Sidebar from './components/Sidebar';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://clerk-next-app.vercel.app/"),
-  title: "Next.js Clerk Template",
-  description:
-    "A simple and powerful Next.js template featuring authentication and user management powered by Clerk.",
-  openGraph: { images: ["/og.png"] },
+  title: 'MODUS | Construction Solutions',
+  description: 'Construction project management and document analysis platform',
 };
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-});
 
 export default function RootLayout({
   children,
@@ -28,31 +18,60 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <ClerkProvider
-        appearance={{
-          variables: { colorPrimary: "#000000" },
-          elements: {
-            formButtonPrimary:
-              "bg-black border border-black border-solid hover:bg-white hover:text-black",
-            socialButtonsBlockButton:
-              "bg-white border-gray-200 hover:bg-transparent hover:border-black text-gray-600 hover:text-black",
-            socialButtonsBlockButtonText: "font-semibold",
-            formButtonReset:
-              "bg-white border border-solid border-gray-200 hover:bg-transparent hover:border-black text-gray-500 hover:text-black",
-            membersPageInviteButton:
-              "bg-black border border-black border-solid hover:bg-white hover:text-black",
-            card: "bg-[#fafafa]",
-          },
-        }}
-      >
-        <body className={`min-h-screen flex flex-col antialiased`}>
-          {children}
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${inter.className} background`}>
+          <AuthProvider>
+            <div className="sidebar-layout">
+              <Sidebar />
+              <main className="main-content">{children}</main>
+            </div>
+          </AuthProvider>
         </body>
-      </ClerkProvider>
+      </html>
+    </ClerkProvider>
+  );
+}
 
-      <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js" />
-      <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js" />
-    </html>
+// Inspired by the Modus website design
+export function NavigationBar() {
+  return (
+    <header className="bg-background-primary text-accent-primary py-4 border-b border-border-light px-6 md:px-12">
+      <div className="container mx-auto flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <div className="font-bold text-xl">
+            <span className="bg-accent-primary text-text-light px-3 py-1">MODUS</span>
+          </div>
+        </div>
+        
+        <nav className="hidden md:flex space-x-10">
+          <a href="/about" className="text-accent-primary font-medium hover:text-accent-secondary transition-colors">
+            ABOUT
+          </a>
+          <a href="/projects" className="text-accent-primary font-medium hover:text-accent-secondary transition-colors">
+            PROJECTS
+          </a>
+          <a href="/services" className="text-accent-primary font-medium hover:text-accent-secondary transition-colors">
+            SERVICES
+          </a>
+          <a href="/news" className="text-accent-primary font-medium hover:text-accent-secondary transition-colors">
+            NEWS
+          </a>
+          <a href="/resources" className="text-accent-primary font-medium hover:text-accent-secondary transition-colors">
+            RESOURCES
+          </a>
+          <a href="/contact" className="text-accent-primary font-medium hover:text-accent-secondary transition-colors">
+            CONTACT US
+          </a>
+        </nav>
+        
+        {/* Mobile menu button - would be implemented with actual functionality */}
+        <button className="md:hidden text-accent-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
   );
 }

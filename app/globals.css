@@ -2,11 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --sidebar-width: 250px;
+  --sidebar-collapsed-width: 70px;
+  --header-height: 64px;
+}
+
+html, body {
+  @apply h-full overflow-auto;
+}
+
+body {
+  @apply bg-background-primary text-text-primary;
+}
+
 .background {
   overflow: hidden;
-  background: #f8f8f8;
-  background-image: repeating-linear-gradient(0deg, transparent, transparent 11px, #f2f2f2 11px, #f2f2f2 12px),
-    repeating-linear-gradient(90deg, transparent, transparent 11px, #f2f2f2 11px, #f2f2f2 12px);
+  background: #FFFFFF;
+  background-image: 
+    linear-gradient(to right, rgba(242, 245, 249, 0.7) 0%, rgba(242, 245, 249, 0.7) 100%);
 }
 
 .mask {
@@ -17,4 +31,164 @@
     rgba(0, 0, 0, 1) calc(100% - 20px),
     rgba(0, 0, 0, 0) 100%
   );
+}
+
+/* Card Styles */
+.card {
+  @apply bg-background-primary rounded-card shadow-card p-6 border border-border-light hover:shadow-card-hover transition-shadow duration-300;
+}
+
+.card-dark {
+  @apply bg-background-dark rounded-card p-6 text-text-light;
+}
+
+.card-accent {
+  @apply bg-background-accent rounded-card shadow-card p-6 border-l-4 border-accent-secondary border-t border-r border-b border-border-light;
+}
+
+.card-blue {
+  @apply bg-accent-light rounded-card p-6;
+}
+
+/* Button Styles */
+.btn-primary {
+  @apply px-4 py-2 bg-accent-primary text-text-light rounded-btn hover:opacity-90 transition-all duration-300 font-bold shadow-btn;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-accent-secondary text-text-light rounded-btn hover:opacity-90 transition-all duration-300 font-bold shadow-btn;
+}
+
+.btn-white {
+  @apply px-4 py-2 bg-background-primary text-accent-primary border border-border-light rounded-btn hover:bg-background-accent transition-colors font-bold shadow-btn;
+}
+
+.btn-outline {
+  @apply px-4 py-2 bg-transparent text-accent-primary border border-accent-primary rounded-btn hover:bg-accent-light/50 transition-colors shadow-btn;
+}
+
+.btn-blue {
+  @apply px-4 py-2 bg-accent-tertiary text-text-light rounded-btn hover:opacity-90 transition-colors shadow-btn;
+}
+
+.btn-icon {
+  @apply p-2 rounded-full bg-background-accent text-text-secondary hover:text-accent-primary transition-colors;
+}
+
+/* Status Indicators */
+.status-badge {
+  @apply inline-flex items-center px-2 py-1 text-xs font-medium rounded-sm;
+}
+
+.status-active {
+  @apply bg-info/10 text-info border border-info/30;
+}
+
+.status-completed {
+  @apply bg-success/10 text-success border border-success/30;
+}
+
+.status-hold {
+  @apply bg-warning/10 text-warning border border-warning/30;
+}
+
+.status-error {
+  @apply bg-error/10 text-error border border-error/30;
+}
+
+/* Layout Utils */
+.sidebar-layout {
+  @apply flex h-screen;
+}
+
+.sidebar {
+  @apply w-[var(--sidebar-width)] bg-background-dark fixed h-full transition-all duration-300 ease-in-out z-10;
+}
+
+.sidebar-collapsed {
+  @apply w-[var(--sidebar-collapsed-width)];
+}
+
+.main-content {
+  @apply ml-[var(--sidebar-width)] transition-all duration-300 ease-in-out w-[calc(100%-var(--sidebar-width))] h-screen overflow-y-auto;
+}
+
+.main-content-expanded {
+  @apply ml-[var(--sidebar-collapsed-width)] w-[calc(100%-var(--sidebar-collapsed-width))];
+}
+
+.top-header {
+  @apply sticky top-0 z-10 bg-background-primary h-[var(--header-height)] border-b border-border-light px-6 flex items-center justify-between;
+}
+
+/* Typography Styles */
+.heading-xl {
+  @apply text-5xl font-bold tracking-tight leading-tight text-accent-primary;
+}
+
+.heading-lg {
+  @apply text-4xl font-bold tracking-tight leading-tight text-accent-primary;
+}
+
+.heading-md {
+  @apply text-3xl font-bold leading-tight text-accent-primary;
+}
+
+.heading-sm {
+  @apply text-2xl font-bold leading-tight text-accent-primary;
+}
+
+/* Grid layouts */
+.card-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.two-column-grid {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-8;
+}
+
+/* Special elements */
+.number-box {
+  @apply w-12 h-12 flex items-center justify-center bg-accent-secondary text-text-light font-bold text-lg;
+}
+
+.accent-dot {
+  @apply w-3 h-3 bg-accent-secondary rounded-full inline-block mr-2;
+}
+
+.diagonal-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 45%, #ED6A2E 45%, #ED6A2E 55%, transparent 55%);
+  z-index: -1;
+}
+
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-accent-tertiary to-accent-primary;
+}
+
+.glass-panel {
+  @apply bg-background-accent border border-border-light;
+}
+
+.highlight-box {
+  @apply border-l-4 border-accent-secondary pl-4 py-2;
+}
+
+.data-card {
+  @apply bg-background-primary p-6 shadow-card hover:shadow-card-hover transition-shadow duration-300;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    @apply w-[var(--sidebar-collapsed-width)];
+  }
+  
+  .main-content {
+    @apply ml-[var(--sidebar-collapsed-width)] w-[calc(100%-var(--sidebar-collapsed-width))];
+  }
 }
