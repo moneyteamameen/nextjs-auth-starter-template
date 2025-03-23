@@ -17,14 +17,14 @@ export default function Header() {
             <input 
               type="text" 
               placeholder="Search..." 
-              className="flex-1 bg-background-accent border border-border-light rounded-btn px-3 py-2 text-text-primary focus:outline-none focus:border-accent-tertiary"
+              className="flex-1 bg-background-accent border border-border-light rounded-btn px-4 py-2.5 text-text-primary text-sm focus:outline-none focus:border-accent-tertiary"
               autoFocus
             />
             <button 
               onClick={() => setIsSearchOpen(false)}
-              className="ml-2 btn-icon"
+              className="ml-3 btn-icon"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
           </div>
         ) : (
@@ -32,31 +32,31 @@ export default function Header() {
             onClick={() => setIsSearchOpen(true)}
             className="btn-icon"
           >
-            <Search size={18} />
+            <Search size={16} />
           </button>
         )}
       </div>
       
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-5">
         <div className="relative">
           <button className="btn-icon relative">
-            <Bell size={18} />
-            <span className="absolute -top-1 -right-1 bg-accent-secondary text-text-light rounded-full w-4 h-4 text-xs flex items-center justify-center">
+            <Bell size={16} />
+            <span className="absolute -top-1 -right-1 bg-accent-secondary text-text-light rounded-full w-3.5 h-3.5 text-[10px] flex items-center justify-center">
               3
             </span>
           </button>
         </div>
         
-        <div className="hidden md:flex items-center space-x-2">
-          <Link href="/document-management/upload" className="btn-blue text-sm">
+        <div className="hidden md:flex items-center space-x-3">
+          <Link href="/document-management/upload" className="btn-blue text-xs font-medium px-4 py-2">
             Upload Documents
           </Link>
-          <Link href="/projects/new" className="btn-secondary text-sm">
+          <Link href="/projects/new" className="btn-secondary text-xs font-medium px-4 py-2">
             New Project
           </Link>
         </div>
         
-        <div className="border-l border-border-light h-8 mx-2 hidden md:block"></div>
+        <div className="border-l border-border-light h-6 mx-2 hidden md:block"></div>
         
         <div className="bg-background-accent rounded-full p-0.5 shadow-sm">
           <UserButton 
@@ -73,24 +73,24 @@ export default function Header() {
           className="md:hidden btn-icon"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
       
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full right-0 w-64 mt-1 bg-background-primary border border-border-light rounded-card shadow-lg p-4 z-20">
-          <div className="space-y-3">
+        <div className="absolute top-full right-0 w-64 mt-1 bg-background-primary border border-border-light rounded-card shadow-lg p-5 z-20">
+          <div className="space-y-4">
             <Link 
               href="/document-management/upload" 
-              className="block btn-blue w-full text-center"
+              className="block btn-blue w-full text-center text-xs font-medium py-2.5"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Upload Documents
             </Link>
             <Link 
               href="/projects/new" 
-              className="block btn-secondary w-full text-center"
+              className="block btn-secondary w-full text-center text-xs font-medium py-2.5"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               New Project

@@ -194,19 +194,18 @@ export default function DocumentManagementPage() {
         {/* Page Header */}
         <div className="mb-12 flex justify-between items-end">
           <div>
-            <div className="uppercase text-accent-secondary font-medium mb-2">••DOCUMENT MANAGEMENT••</div>
-            <h1 className="heading-lg mb-1">Construction Documents</h1>
-            <p className="text-text-secondary">Upload, process and manage your construction documents</p>
+            <h1 className="text-3xl font-medium tracking-tight mb-2">Construction Documents</h1>
+            <p className="text-text-secondary text-base font-light">Upload, process and manage your construction documents</p>
           </div>
           <div className="flex gap-4">
             <button 
               onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
-              className="btn-outline"
+              className="btn-outline text-sm font-medium"
             >
               {viewMode === 'grid' ? 'List View' : 'Grid View'}
             </button>
             {selectedDocuments.length > 0 && (
-              <button className="btn-secondary">
+              <button className="btn-secondary text-sm font-medium">
                 Process {selectedDocuments.length} Selected
               </button>
             )}
@@ -214,8 +213,8 @@ export default function DocumentManagementPage() {
         </div>
         
         {/* Upload Section */}
-        <div className="mb-10 card">
-          <h2 className="text-xl font-bold mb-4 text-accent-primary">Upload Documents</h2>
+        <div className="mb-12 card">
+          <h2 className="text-xl font-medium mb-5 text-accent-primary">Upload Documents</h2>
           <DocumentUpload 
             maxFiles={10}
             acceptedFileTypes={['pdf', 'doc', 'docx', 'xls', 'xlsx', 'dwg', 'jpg', 'png']}
@@ -225,30 +224,30 @@ export default function DocumentManagementPage() {
         </div>
         
         {/* Filters */}
-        <div className="mb-8 flex flex-col md:flex-row gap-4">
+        <div className="mb-10 flex flex-col md:flex-row gap-4">
           <div className="relative flex-grow max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary" size={18} />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary" size={16} />
             <input
               type="text"
               placeholder="Search documents..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-background-accent border border-border-light focus:border-accent-primary focus:outline-none text-text-primary placeholder-text-secondary rounded-btn"
+              className="w-full pl-11 pr-4 py-3 bg-background-accent border border-border-light focus:border-accent-primary focus:outline-none text-text-primary placeholder-text-secondary rounded-btn text-sm"
             />
           </div>
           
           <div className="relative">
             <button
               onClick={() => setShowTypeFilter(!showTypeFilter)}
-              className="flex items-center justify-between min-w-[180px] px-4 py-3 bg-background-accent border border-border-light hover:border-accent-primary focus:outline-none rounded-btn"
+              className="flex items-center justify-between min-w-[180px] px-4 py-3 bg-background-accent border border-border-light hover:border-accent-primary focus:outline-none rounded-btn text-sm"
             >
               <span className="flex items-center">
-                <Filter size={18} className="mr-2 text-text-secondary" />
-                <span className="capitalize">
+                <Filter size={16} className="mr-2.5 text-text-secondary" />
+                <span className="capitalize font-light">
                   {typeFilter === 'all' ? 'All Types' : typeFilter}
                 </span>
               </span>
-              <ChevronDown size={18} />
+              <ChevronDown size={14} />
             </button>
             
             {showTypeFilter && (
@@ -256,7 +255,7 @@ export default function DocumentManagementPage() {
                 {documentTypes.map(type => (
                   <button
                     key={type}
-                    className={`w-full px-4 py-2 text-left capitalize hover:bg-background-accent ${
+                    className={`w-full px-4 py-2.5 text-left capitalize hover:bg-background-accent text-sm font-light ${
                       typeFilter === type ? 'bg-background-accent' : ''
                     }`}
                     onClick={() => {
@@ -275,22 +274,22 @@ export default function DocumentManagementPage() {
         {/* Document Grid/List View */}
         {filteredDocuments.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-text-secondary text-lg mb-4">No documents found matching your criteria.</p>
+            <p className="text-text-secondary text-lg font-light mb-4">No documents found matching your criteria.</p>
             <button
               onClick={() => {
                 setSearchQuery('');
                 setTypeFilter('all');
               }}
-              className="text-accent-secondary font-medium hover:underline"
+              className="text-accent-secondary font-medium text-sm hover:underline"
             >
               Clear filters
             </button>
           </div>
         ) : viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredDocuments.map(document => (
               <div key={document.id} className="card group">
-                <div className="flex justify-between items-start mb-4">
+                <div className="flex justify-between items-start mb-5">
                   <span className={getStatusBadgeClass(document.processingStatus)}>
                     {document.processingStatus.charAt(0).toUpperCase() + document.processingStatus.slice(1)}
                   </span>
@@ -299,45 +298,45 @@ export default function DocumentManagementPage() {
                       type="checkbox"
                       checked={selectedDocuments.includes(document.id)}
                       onChange={() => toggleDocumentSelection(document.id)}
-                      className="mr-2 rounded-btn accent-accent-secondary"
+                      className="mr-3 rounded-btn accent-accent-secondary"
                     />
                     <button className="btn-icon">
-                      <MoreHorizontal size={16} />
+                      <MoreHorizontal size={14} />
                     </button>
                   </div>
                 </div>
                 
-                <div className="flex items-start space-x-3 mb-4">
+                <div className="flex items-start space-x-4 mb-5">
                   <div className="p-3 bg-background-accent text-accent-primary rounded-sm">
-                    <FileText size={24} />
+                    <FileText size={20} />
                   </div>
                   <div>
-                    <h3 className="font-bold text-accent-primary group-hover:text-accent-secondary transition-colors">
+                    <h3 className="font-medium text-accent-primary group-hover:text-accent-secondary transition-colors">
                       {document.name}
                     </h3>
-                    <p className="text-text-secondary text-sm">
+                    <p className="text-text-secondary text-xs font-light mt-0.5">
                       {formatFileSize(document.size)} • {document.type.toUpperCase()}
                     </p>
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-2 gap-4 mb-5">
                   <div className="flex items-center">
-                    <Folder size={16} className="text-accent-tertiary mr-2" />
-                    <span className="text-text-secondary text-sm">{document.project}</span>
+                    <Folder size={14} className="text-accent-tertiary mr-2" />
+                    <span className="text-text-secondary text-xs">{document.project}</span>
                   </div>
                   <div className="flex items-center">
-                    <Calendar size={16} className="text-accent-secondary mr-2" />
-                    <span className="text-text-secondary text-sm">{formatDate(document.uploadedAt)}</span>
+                    <Calendar size={14} className="text-accent-secondary mr-2" />
+                    <span className="text-text-secondary text-xs">{formatDate(document.uploadedAt)}</span>
                   </div>
                 </div>
                 
                 <div className="flex justify-end">
                   <Link 
                     href={`/documents/${document.id}`}
-                    className="text-accent-primary font-bold group-hover:text-accent-secondary hover:underline inline-flex items-center"
+                    className="text-accent-primary font-medium text-sm group-hover:text-accent-secondary hover:underline inline-flex items-center"
                   >
-                    View Details <ArrowRight className="ml-2 group-hover:ml-3 transition-all" size={16} />
+                    View Details <ArrowRight className="ml-2 group-hover:ml-3 transition-all" size={14} />
                   </Link>
                 </div>
               </div>
@@ -348,7 +347,7 @@ export default function DocumentManagementPage() {
             <table className="min-w-full">
               <thead>
                 <tr className="border-b border-border-light">
-                  <th className="text-left p-3 font-medium text-text-secondary">
+                  <th className="text-left p-3 font-medium text-text-secondary text-xs">
                     <input
                       type="checkbox"
                       onChange={() => {
@@ -363,12 +362,12 @@ export default function DocumentManagementPage() {
                     />
                     Name
                   </th>
-                  <th className="text-left p-3 font-medium text-text-secondary">Project</th>
-                  <th className="text-left p-3 font-medium text-text-secondary">Type</th>
-                  <th className="text-left p-3 font-medium text-text-secondary">Size</th>
-                  <th className="text-left p-3 font-medium text-text-secondary">Date</th>
-                  <th className="text-left p-3 font-medium text-text-secondary">Status</th>
-                  <th className="text-left p-3 font-medium text-text-secondary">Actions</th>
+                  <th className="text-left p-3 font-medium text-text-secondary text-xs">Project</th>
+                  <th className="text-left p-3 font-medium text-text-secondary text-xs">Type</th>
+                  <th className="text-left p-3 font-medium text-text-secondary text-xs">Size</th>
+                  <th className="text-left p-3 font-medium text-text-secondary text-xs">Date</th>
+                  <th className="text-left p-3 font-medium text-text-secondary text-xs">Status</th>
+                  <th className="text-left p-3 font-medium text-text-secondary text-xs">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -382,30 +381,30 @@ export default function DocumentManagementPage() {
                           onChange={() => toggleDocumentSelection(document.id)}
                           className="mr-3 accent-accent-secondary"
                         />
-                        <FileText size={18} className="text-accent-primary mr-2" />
-                        <span className="font-medium text-accent-primary">{document.name}</span>
+                        <FileText size={16} className="text-accent-primary mr-2.5" />
+                        <span className="font-medium text-accent-primary text-sm">{document.name}</span>
                       </div>
                     </td>
-                    <td className="p-3 text-text-secondary">{document.project}</td>
-                    <td className="p-3 uppercase text-text-secondary">{document.type}</td>
-                    <td className="p-3 text-text-secondary">{formatFileSize(document.size)}</td>
-                    <td className="p-3 text-text-secondary">{formatDate(document.uploadedAt)}</td>
+                    <td className="p-3 text-text-secondary text-sm font-light">{document.project}</td>
+                    <td className="p-3 uppercase text-text-secondary text-xs font-medium">{document.type}</td>
+                    <td className="p-3 text-text-secondary text-sm font-light">{formatFileSize(document.size)}</td>
+                    <td className="p-3 text-text-secondary text-sm font-light">{formatDate(document.uploadedAt)}</td>
                     <td className="p-3">
                       <span className={getStatusBadgeClass(document.processingStatus)}>
                         {document.processingStatus.charAt(0).toUpperCase() + document.processingStatus.slice(1)}
                       </span>
                     </td>
                     <td className="p-3">
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-3">
                         <Link 
                           href={`/documents/${document.id}`}
                           className="btn-icon"
                           title="View Document"
                         >
-                          <ArrowRight size={16} />
+                          <ArrowRight size={14} />
                         </Link>
                         <button className="btn-icon" title="More Options">
-                          <MoreHorizontal size={16} />
+                          <MoreHorizontal size={14} />
                         </button>
                       </div>
                     </td>

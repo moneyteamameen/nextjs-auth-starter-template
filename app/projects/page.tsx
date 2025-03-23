@@ -194,49 +194,48 @@ export default function ProjectsPage() {
         {/* Page Header */}
         <div className="mb-12 flex justify-between items-end">
           <div>
-            <div className="uppercase text-accent-secondary font-medium mb-2">••CONSTRUCTION PROJECTS••</div>
-            <h1 className="heading-lg mb-1">Project Management</h1>
-            <p className="text-text-secondary">Manage and track your construction projects</p>
+            <h1 className="text-3xl font-medium tracking-tight mb-2">Project Management</h1>
+            <p className="text-text-secondary text-base font-light">Manage and track your construction projects</p>
           </div>
           <div>
-            <Link href="/projects/new" className="btn-secondary inline-flex items-center">
-              <Plus size={18} className="mr-2" /> New Project
+            <Link href="/projects/new" className="btn-secondary inline-flex items-center gap-2">
+              <Plus size={16} /> New Project
             </Link>
           </div>
         </div>
         
         {/* Filters */}
-        <div className="mb-8 flex flex-col md:flex-row gap-4">
+        <div className="mb-10 flex flex-col md:flex-row gap-4">
           <div className="relative flex-grow max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary" size={18} />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary" size={16} />
             <input
               type="text"
               placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-background-accent border border-border-light focus:border-accent-primary focus:outline-none text-text-primary placeholder-text-secondary rounded-btn"
+              className="w-full pl-11 pr-4 py-3 bg-background-accent border border-border-light focus:border-accent-primary focus:outline-none text-text-primary placeholder-text-secondary rounded-btn text-sm"
             />
           </div>
           
           <div className="relative">
             <button
               onClick={() => setShowStatusFilter(!showStatusFilter)}
-              className="flex items-center justify-between min-w-[200px] px-4 py-3 bg-background-accent border border-border-light hover:border-accent-primary focus:outline-none rounded-btn"
+              className="flex items-center justify-between min-w-[200px] px-4 py-3 bg-background-accent border border-border-light hover:border-accent-primary focus:outline-none rounded-btn text-sm"
             >
               <span className="flex items-center">
-                <Filter size={18} className="mr-2 text-text-secondary" />
-                <span>
+                <Filter size={16} className="mr-2.5 text-text-secondary" />
+                <span className="font-light">
                   {statusFilter === 'all' ? 'All Statuses' : 
                    statusOptions.find(s => s.value === statusFilter)?.label}
                 </span>
               </span>
-              <ChevronDown size={18} />
+              <ChevronDown size={14} />
             </button>
             
             {showStatusFilter && (
               <div className="absolute z-10 w-full mt-1 bg-background-primary border border-border-light shadow-lg rounded-btn">
                 <button
-                  className={`w-full px-4 py-2 text-left hover:bg-background-accent ${
+                  className={`w-full px-4 py-2.5 text-left hover:bg-background-accent text-sm font-light ${
                     statusFilter === 'all' ? 'bg-background-accent' : ''
                   }`}
                   onClick={() => {
@@ -249,7 +248,7 @@ export default function ProjectsPage() {
                 {statusOptions.map(status => (
                   <button
                     key={status.value}
-                    className={`w-full px-4 py-2 text-left hover:bg-background-accent ${
+                    className={`w-full px-4 py-2.5 text-left hover:bg-background-accent text-sm font-light ${
                       statusFilter === status.value ? 'bg-background-accent' : ''
                     }`}
                     onClick={() => {
@@ -266,16 +265,16 @@ export default function ProjectsPage() {
         </div>
         
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.length === 0 ? (
-            <div className="col-span-full text-center py-12">
-              <p className="text-text-secondary text-lg">No projects found matching your criteria.</p>
+            <div className="col-span-full text-center py-16">
+              <p className="text-text-secondary text-lg font-light">No projects found matching your criteria.</p>
               <button
                 onClick={() => {
                   setSearchQuery('');
                   setStatusFilter('all');
                 }}
-                className="mt-4 text-accent-secondary font-medium hover:underline"
+                className="mt-5 text-accent-secondary font-medium text-sm hover:underline"
               >
                 Clear filters
               </button>
@@ -287,50 +286,50 @@ export default function ProjectsPage() {
                 key={project.id} 
                 className="card group hover:shadow-card-hover transition-all duration-300"
               >
-                <div className="mb-4 flex justify-between items-start">
+                <div className="mb-5 flex justify-between items-start">
                   <span className={getStatusClass(project.status)}>
                     {statusOptions.find(s => s.value === project.status)?.label}
                   </span>
-                  <div className="bg-background-accent h-8 w-8 flex items-center justify-center rounded-full">
-                    <span className="text-text-secondary text-sm font-bold">{project.progress}%</span>
+                  <div className="bg-background-accent h-7 w-7 flex items-center justify-center rounded-full">
+                    <span className="text-text-secondary text-xs font-medium">{project.progress}%</span>
                   </div>
                 </div>
                 
-                <h2 className="text-xl font-bold mb-2 text-accent-primary group-hover:text-accent-secondary transition-colors">
+                <h2 className="text-lg font-medium mb-2 text-accent-primary group-hover:text-accent-secondary transition-colors">
                   {project.name}
                 </h2>
                 
-                <p className="text-text-secondary mb-4 line-clamp-2">
+                <p className="text-text-secondary text-sm font-light mb-5 line-clamp-2 leading-relaxed">
                   {project.description}
                 </p>
                 
-                <div className="text-sm mb-4 text-text-secondary">
+                <div className="text-xs mb-5 text-text-secondary">
                   Client: <span className="font-medium text-text-primary">{project.clientName}</span>
                 </div>
                 
-                <div className="grid grid-cols-3 gap-2 mb-4">
-                  <div className="bg-background-accent p-2 flex flex-col items-center justify-center">
-                    <CalendarDays size={16} className="text-accent-primary mb-1" />
-                    <span className="text-xs text-text-secondary">Updated</span>
+                <div className="grid grid-cols-3 gap-3 mb-5">
+                  <div className="bg-background-accent p-2.5 flex flex-col items-center justify-center">
+                    <CalendarDays size={14} className="text-accent-primary mb-1.5" />
+                    <span className="text-[10px] text-text-secondary">Updated</span>
                     <span className="text-xs font-medium">{formatDate(project.lastUpdated)}</span>
                   </div>
                   
-                  <div className="bg-background-accent p-2 flex flex-col items-center justify-center">
-                    <Files size={16} className="text-accent-secondary mb-1" />
-                    <span className="text-xs text-text-secondary">Documents</span>
+                  <div className="bg-background-accent p-2.5 flex flex-col items-center justify-center">
+                    <Files size={14} className="text-accent-secondary mb-1.5" />
+                    <span className="text-[10px] text-text-secondary">Documents</span>
                     <span className="text-xs font-medium">{project.documentsCount}</span>
                   </div>
                   
-                  <div className="bg-background-accent p-2 flex flex-col items-center justify-center">
-                    <Users size={16} className="text-accent-tertiary mb-1" />
-                    <span className="text-xs text-text-secondary">Reports</span>
+                  <div className="bg-background-accent p-2.5 flex flex-col items-center justify-center">
+                    <Users size={14} className="text-accent-tertiary mb-1.5" />
+                    <span className="text-[10px] text-text-secondary">Reports</span>
                     <span className="text-xs font-medium">{project.reportsCount}</span>
                   </div>
                 </div>
                 
                 <div className="group-hover:pl-2 transition-all duration-300 flex items-center text-accent-primary group-hover:text-accent-secondary">
-                  <span className="font-bold">View Details</span>
-                  <ArrowRight className="ml-2 group-hover:ml-3 transition-all" size={16} />
+                  <span className="font-medium text-sm">View Details</span>
+                  <ArrowRight className="ml-2 group-hover:ml-3 transition-all" size={14} />
                 </div>
               </Link>
             ))

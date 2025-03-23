@@ -183,91 +183,90 @@ export default function Dashboard() {
         {/* Dashboard Header */}
         <div className="mb-12 flex justify-between items-end">
           <div>
-            <div className="uppercase text-accent-secondary font-medium mb-2">••CONSTRUCTION SOLUTIONS••</div>
-            <h1 className="heading-lg mb-1">Dashboard</h1>
-            <p className="text-text-secondary">Monitor your projects and activities</p>
+            <h1 className="text-3xl font-medium tracking-tight mb-2">Dashboard</h1>
+            <p className="text-text-secondary text-base font-light">Monitor your projects and activities</p>
           </div>
           <div>
-            <Link href="/projects/new" className="btn-secondary inline-flex items-center">
-              New Project <ArrowRight className="ml-2" size={18} />
+            <Link href="/projects/new" className="btn-secondary inline-flex items-center gap-2">
+              New Project <ArrowRight size={16} />
             </Link>
           </div>
         </div>
         
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <div className="card p-6 border-t-4 border-accent-primary">
-            <div className="flex justify-between items-start mb-4">
-              <div className="text-text-secondary">Total Projects</div>
-              <FolderKanban size={24} className="text-accent-primary" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="card p-7 border-t-4 border-accent-primary">
+            <div className="flex justify-between items-start mb-5">
+              <div className="text-text-secondary text-sm font-medium">Total Projects</div>
+              <FolderKanban size={22} className="text-accent-primary" />
             </div>
-            <div className="text-4xl font-bold mb-2 text-accent-primary">{metrics.totalProjects}</div>
-            <div className="text-sm text-success font-medium">↑ 20% increase</div>
+            <div className="text-4xl font-light mb-3 text-accent-primary">{metrics.totalProjects}</div>
+            <div className="text-xs text-success font-medium">↑ 20% increase</div>
           </div>
           
-          <div className="card p-6 border-t-4 border-accent-tertiary">
-            <div className="flex justify-between items-start mb-4">
-              <div className="text-text-secondary">Documents Processed</div>
-              <FileText size={24} className="text-accent-tertiary" />
+          <div className="card p-7 border-t-4 border-accent-tertiary">
+            <div className="flex justify-between items-start mb-5">
+              <div className="text-text-secondary text-sm font-medium">Documents Processed</div>
+              <FileText size={22} className="text-accent-tertiary" />
             </div>
-            <div className="text-4xl font-bold mb-2 text-accent-tertiary">{metrics.documentsProcessed}</div>
-            <div className="text-sm text-success font-medium">↑ 12% increase</div>
+            <div className="text-4xl font-light mb-3 text-accent-tertiary">{metrics.documentsProcessed}</div>
+            <div className="text-xs text-success font-medium">↑ 12% increase</div>
           </div>
           
-          <div className="card p-6 border-t-4 border-accent-secondary">
-            <div className="flex justify-between items-start mb-4">
-              <div className="text-text-secondary">Reports Generated</div>
-              <BarChart4 size={24} className="text-accent-secondary" />
+          <div className="card p-7 border-t-4 border-accent-secondary">
+            <div className="flex justify-between items-start mb-5">
+              <div className="text-text-secondary text-sm font-medium">Reports Generated</div>
+              <BarChart4 size={22} className="text-accent-secondary" />
             </div>
-            <div className="text-4xl font-bold mb-2 text-accent-secondary">{metrics.reportsGenerated}</div>
-            <div className="text-sm text-success font-medium">↑ 5% increase</div>
+            <div className="text-4xl font-light mb-3 text-accent-secondary">{metrics.reportsGenerated}</div>
+            <div className="text-xs text-success font-medium">↑ 5% increase</div>
           </div>
           
-          <div className="card p-6 border-t-4 border-accent-primary">
-            <div className="flex justify-between items-start mb-4">
-              <div className="text-text-secondary">Completion Rate</div>
-              <Percent size={24} className="text-accent-primary" />
+          <div className="card p-7 border-t-4 border-accent-primary">
+            <div className="flex justify-between items-start mb-5">
+              <div className="text-text-secondary text-sm font-medium">Completion Rate</div>
+              <Percent size={22} className="text-accent-primary" />
             </div>
-            <div className="text-4xl font-bold mb-2 text-accent-primary">{metrics.completionRate}%</div>
-            <div className="text-sm text-success font-medium">↑ 3% increase</div>
+            <div className="text-4xl font-light mb-3 text-accent-primary">{metrics.completionRate}%</div>
+            <div className="text-xs text-success font-medium">↑ 3% increase</div>
           </div>
         </div>
         
         {/* Quick Actions Section */}
-        <div className="mb-12">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="heading-sm">Quick Actions</h2>
+        <div className="mb-16">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-xl font-medium tracking-tight">Quick Actions</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="card group p-0 overflow-hidden">
-              <div className="h-2 bg-accent-secondary w-full"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-3 text-accent-primary">Upload Documents</h3>
-                <p className="text-text-secondary mb-4">Upload and process new construction documents</p>
-                <Link href="/document-management" className="text-accent-secondary font-bold group-hover:underline flex items-center">
-                  Upload Now <ArrowRight className="ml-2 group-hover:ml-3 transition-all" size={18} />
+              <div className="h-1.5 bg-accent-secondary w-full"></div>
+              <div className="p-7">
+                <h3 className="text-lg font-medium mb-3 text-accent-primary">Upload Documents</h3>
+                <p className="text-text-secondary text-sm leading-relaxed mb-5">Upload and process new construction documents</p>
+                <Link href="/document-management" className="text-accent-secondary font-medium text-sm group-hover:underline flex items-center">
+                  Upload Now <ArrowRight className="ml-2 group-hover:ml-3 transition-all" size={16} />
                 </Link>
               </div>
             </div>
             
             <div className="card group p-0 overflow-hidden">
-              <div className="h-2 bg-accent-tertiary w-full"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-3 text-accent-primary">Generate Report</h3>
-                <p className="text-text-secondary mb-4">Create new reports from your processed documents</p>
-                <Link href="/reports/generate" className="text-accent-tertiary font-bold group-hover:underline flex items-center">
-                  Generate <ArrowRight className="ml-2 group-hover:ml-3 transition-all" size={18} />
+              <div className="h-1.5 bg-accent-tertiary w-full"></div>
+              <div className="p-7">
+                <h3 className="text-lg font-medium mb-3 text-accent-primary">Generate Report</h3>
+                <p className="text-text-secondary text-sm leading-relaxed mb-5">Create new reports from your processed documents</p>
+                <Link href="/reports/generate" className="text-accent-tertiary font-medium text-sm group-hover:underline flex items-center">
+                  Generate <ArrowRight className="ml-2 group-hover:ml-3 transition-all" size={16} />
                 </Link>
               </div>
             </div>
             
             <div className="card group p-0 overflow-hidden">
-              <div className="h-2 bg-accent-primary w-full"></div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-3 text-accent-primary">Manage Projects</h3>
-                <p className="text-text-secondary mb-4">View and manage your construction projects</p>
-                <Link href="/projects" className="text-accent-primary font-bold group-hover:underline flex items-center">
-                  View Projects <ArrowRight className="ml-2 group-hover:ml-3 transition-all" size={18} />
+              <div className="h-1.5 bg-accent-primary w-full"></div>
+              <div className="p-7">
+                <h3 className="text-lg font-medium mb-3 text-accent-primary">Manage Projects</h3>
+                <p className="text-text-secondary text-sm leading-relaxed mb-5">View and manage your construction projects</p>
+                <Link href="/projects" className="text-accent-primary font-medium text-sm group-hover:underline flex items-center">
+                  View Projects <ArrowRight className="ml-2 group-hover:ml-3 transition-all" size={16} />
                 </Link>
               </div>
             </div>
@@ -275,28 +274,28 @@ export default function Dashboard() {
         </div>
         
         {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Processing Progress - Takes 2 columns */}
           <div className="lg:col-span-2">
-            <div className="card p-6 mb-6">
-              <h2 className="heading-sm mb-6">Processing Status</h2>
-              <div className="space-y-6">
+            <div className="card p-7 mb-6">
+              <h2 className="text-xl font-medium tracking-tight mb-8">Processing Status</h2>
+              <div className="space-y-8">
                 {processingItems.map(item => (
-                  <div key={item.id} className="border-l-4 pl-4" style={{
+                  <div key={item.id} className="border-l-3 pl-5" style={{
                     borderColor: item.status === 'processing' ? '#ED6A2E' : 
                                 item.status === 'completed' ? '#10b981' : 
                                 '#64748b'
                   }}>
-                    <div className="flex justify-between items-start mb-2">
+                    <div className="flex justify-between items-start mb-3">
                       <div>
-                        <h3 className="font-bold text-accent-primary">{item.name}</h3>
-                        <div className="text-sm text-text-secondary">
+                        <h3 className="font-medium text-accent-primary text-base">{item.name}</h3>
+                        <div className="text-xs text-text-secondary mt-0.5">
                           {item.status === 'processing' ? 'Processing...' : 
                            item.status === 'completed' ? 'Completed' : 
                            'Queued'}
                         </div>
                       </div>
-                      <div className="text-sm font-bold" style={{
+                      <div className="text-sm font-medium" style={{
                         color: item.status === 'processing' ? '#ED6A2E' : 
                                item.status === 'completed' ? '#10b981' : 
                                '#64748b'
@@ -304,7 +303,7 @@ export default function Dashboard() {
                         {item.progress}%
                       </div>
                     </div>
-                    <div className="w-full bg-background-accent rounded-none h-2">
+                    <div className="w-full bg-background-accent rounded-none h-1.5">
                       <div 
                         className="h-full transition-all duration-500" 
                         style={{
@@ -316,7 +315,7 @@ export default function Dashboard() {
                       ></div>
                     </div>
                     {item.estimatedCompletion && (
-                      <div className="text-xs text-text-secondary mt-1">
+                      <div className="text-xs text-text-secondary mt-2">
                         Est. completion: {item.estimatedCompletion.toLocaleTimeString()}
                       </div>
                     )}
@@ -328,17 +327,17 @@ export default function Dashboard() {
           
           {/* Activity Feed - Takes 1 column */}
           <div>
-            <div className="card p-6">
-              <h2 className="heading-sm mb-6">Recent Activity</h2>
-              <div className="space-y-6">
+            <div className="card p-7">
+              <h2 className="text-xl font-medium tracking-tight mb-8">Recent Activity</h2>
+              <div className="space-y-8">
                 {activities.map(activity => (
                   <div key={activity.id} className="group">
                     <div className="flex items-start">
-                      <div className="w-2 h-2 rounded-full bg-accent-secondary mt-2 mr-3 group-hover:scale-150 transition-transform"></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent-secondary mt-2 mr-3.5 group-hover:scale-150 transition-transform"></div>
                       <div>
-                        <h3 className="font-bold text-accent-primary">{activity.title}</h3>
-                        <p className="text-text-primary mb-1">{activity.description}</p>
-                        <div className="text-sm text-text-secondary flex justify-between">
+                        <h3 className="font-medium text-accent-primary text-base">{activity.title}</h3>
+                        <p className="text-text-primary text-sm mt-1 mb-2">{activity.description}</p>
+                        <div className="text-xs text-text-secondary flex justify-between">
                           <span>{activity.project}</span>
                           <span>{formatTimeAgo(activity.timestamp)}</span>
                         </div>
@@ -347,9 +346,9 @@ export default function Dashboard() {
                   </div>
                 ))}
               </div>
-              <div className="mt-6 pt-4 border-t border-border-light">
-                <Link href="/activities" className="text-accent-secondary font-bold hover:underline flex items-center justify-center">
-                  View All Activities <ArrowRight className="ml-2" size={16} />
+              <div className="mt-8 pt-5 border-t border-border-light">
+                <Link href="/activities" className="text-accent-secondary font-medium text-sm hover:underline flex items-center justify-center">
+                  View All Activities <ArrowRight className="ml-2" size={14} />
                 </Link>
               </div>
             </div>

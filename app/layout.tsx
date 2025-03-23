@@ -1,11 +1,9 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { AuthProvider } from './context/auth-context';
 import Sidebar from './components/Sidebar';
-
-const inter = Inter({ subsets: ['latin'] });
+import { geistSans, geistMono } from './fonts';
 
 export const metadata: Metadata = {
   title: 'MODUS | Construction Solutions',
@@ -18,9 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.className} background`}>
+    <ClerkProvider 
+      appearance={{
+        variables: { colorPrimary: '#0A1E3A' }
+      }}
+      // Adding 60 seconds of clock skew tolerance
+      clockSkewInMs={60000}
+    >
+      <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+        <body className="background">
           <AuthProvider>
             <div className="sidebar-layout">
               <Sidebar />

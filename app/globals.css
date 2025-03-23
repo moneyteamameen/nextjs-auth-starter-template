@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Font declarations */
+/* We don't need the @font-face declarations as they're handled by next/font */
+
 :root {
-  --sidebar-width: 250px;
-  --sidebar-collapsed-width: 70px;
+  --sidebar-width: 240px;
+  --sidebar-collapsed-width: 64px;
   --header-height: 64px;
+  --font-primary: var(--font-geist-sans);
+  --font-secondary: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 html, body {
@@ -14,6 +20,16 @@ html, body {
 
 body {
   @apply bg-background-primary text-text-primary;
+  font-family: var(--font-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+}
+
+code, pre {
+  font-family: var(--font-mono);
 }
 
 .background {
@@ -123,7 +139,7 @@ body {
 }
 
 .sidebar {
-  @apply w-[var(--sidebar-width)] bg-background-dark fixed h-full transition-all duration-300 ease-in-out z-10;
+  @apply w-[var(--sidebar-width)] bg-background-dark fixed h-full transition-all duration-200 ease-in-out z-10 shadow-md;
 }
 
 .sidebar-collapsed {
@@ -131,7 +147,7 @@ body {
 }
 
 .main-content {
-  @apply ml-[var(--sidebar-width)] transition-all duration-300 ease-in-out w-[calc(100%-var(--sidebar-width))] h-screen overflow-y-auto;
+  @apply ml-[var(--sidebar-width)] transition-all duration-200 ease-in-out w-[calc(100%-var(--sidebar-width))] h-screen overflow-y-auto;
 }
 
 .main-content-expanded {

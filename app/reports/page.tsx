@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/auth-context';
-import DashboardLayout from '../components/DashboardLayout';
 import Link from 'next/link';
-import { BarChart4, Filter, Search, Calendar, FileText, User } from 'lucide-react';
+import Header from '../components/Header';
+import { BarChart4, Filter, Search, Calendar, FileText, User, ArrowRight } from 'lucide-react';
 import { mockReports } from '../data/mockReports';
 
 export default function ReportsPage() {
@@ -61,19 +61,25 @@ export default function ReportsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <p className="text-lg">Loading...</p>
+      <div className="flex justify-center items-center min-h-screen bg-background-primary">
+        <div className="animate-pulse flex items-center">
+          <div className="h-12 w-12 bg-accent-secondary"></div>
+          <div className="h-2 w-24 bg-text-secondary ml-4"></div>
+        </div>
       </div>
     );
   }
   
   if (!user) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <p className="text-lg mb-4">Please sign in to access reports</p>
-          <Link href="/sign-in" className="btn-primary">
-            Sign In
+      <div className="flex justify-center items-center min-h-screen bg-background-primary">
+        <div className="text-center max-w-md">
+          <div className="bg-accent-primary p-4 inline-block mb-6">
+            <h2 className="text-text-light font-bold text-xl">SIGN IN REQUIRED</h2>
+          </div>
+          <p className="text-lg mb-8 text-text-secondary">Please sign in to access your reports</p>
+          <Link href="/sign-in" className="btn-primary inline-flex items-center gap-2">
+            Sign In <ArrowRight size={16} />
           </Link>
         </div>
       </div>
@@ -81,40 +87,41 @@ export default function ReportsPage() {
   }
   
   return (
-    <DashboardLayout>
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Reports</h1>
-          <Link 
-            href="/reports/generate"
-            className="btn-primary"
-          >
-            Generate New Report
-          </Link>
+    <div className="bg-background-primary gridline-background h-screen text-text-primary overflow-y-auto">
+      <Header />
+      <div className="max-w-7xl mx-auto px-4 pt-12 pb-20">
+        {/* Page Header */}
+        <div className="mb-12 flex justify-between items-end">
+          <div>
+            <h1 className="text-3xl font-medium tracking-tight mb-2">Reports</h1>
+            <p className="text-text-secondary text-base font-light">Generate and manage construction project reports</p>
+          </div>
+          <div>
+            <Link href="/reports/generate" className="btn-primary inline-flex items-center gap-2 text-sm font-medium">
+              Generate New Report <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
         
         {/* Filters and Search */}
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <form className="flex-grow max-w-md relative" onSubmit={(e) => e.preventDefault()}>
+        <div className="flex flex-col md:flex-row gap-4 mb-10">
+          <div className="relative flex-grow max-w-md">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary" size={16} />
             <input
               type="text"
               placeholder="Search reports..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:border-transparent"
+              className="w-full pl-11 pr-4 py-3 bg-background-accent border border-border-light focus:border-accent-primary focus:outline-none text-text-primary text-sm placeholder-text-secondary rounded-btn"
             />
-            <Search 
-              size={18} 
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
-            />
-          </form>
+          </div>
           
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <div className="relative">
               <select
                 value={projectFilter}
                 onChange={(e) => setProjectFilter(e.target.value)}
-                className="appearance-none pl-10 pr-8 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:border-transparent"
+                className="appearance-none pl-11 pr-4 py-3 rounded-btn border border-border-light focus:outline-none focus:border-accent-primary bg-background-accent text-sm font-light"
               >
                 <option value="all">All Projects</option>
                 {projects.filter(p => p !== 'all').map(project => (
@@ -122,15 +129,15 @@ export default function ReportsPage() {
                 ))}
               </select>
               <Filter 
-                size={18} 
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
+                size={16} 
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-secondary" 
               />
             </div>
             
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest' | 'title')}
-              className="appearance-none px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:border-transparent"
+              className="appearance-none px-4 py-3 rounded-btn border border-border-light focus:outline-none focus:border-accent-primary bg-background-accent text-sm font-light"
             >
               <option value="newest">Newest First</option>
               <option value="oldest">Oldest First</option>
@@ -141,56 +148,56 @@ export default function ReportsPage() {
         
         {/* Reports List */}
         {reports.length === 0 ? (
-          <div className="card p-12 text-center">
-            <BarChart4 size={48} className="text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium mb-2">No reports found</h3>
-            <p className="text-text-secondary mb-6">
+          <div className="card p-16 text-center">
+            <BarChart4 size={40} className="text-text-secondary opacity-30 mx-auto mb-5" />
+            <h3 className="text-lg font-medium mb-3">No reports found</h3>
+            <p className="text-text-secondary text-sm font-light mb-7 max-w-md mx-auto">
               {searchQuery || projectFilter !== 'all'
-                ? 'Try adjusting your search or filters'
-                : 'Generate your first report to get started'}
+                ? 'Try adjusting your search or filters to find what you are looking for'
+                : 'Generate your first report to get started with your project documentation'}
             </p>
             <Link 
               href="/reports/generate"
-              className="btn-primary inline-block"
+              className="btn-primary inline-flex items-center gap-2 text-sm font-medium"
             >
-              Generate Report
+              Generate Report <ArrowRight size={16} />
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {reports.map(report => (
               <div key={report.id} className="card hover:shadow-md transition-shadow">
-                <div className="mb-4">
-                  <h3 className="font-semibold text-lg truncate">{report.title}</h3>
-                  <p className="text-text-secondary text-sm line-clamp-2">{report.description}</p>
+                <div className="mb-5">
+                  <h3 className="font-medium text-lg text-accent-primary mb-2 truncate">{report.title}</h3>
+                  <p className="text-text-secondary text-sm font-light line-clamp-2 leading-relaxed">{report.description}</p>
                 </div>
                 
-                <div className="space-y-2 mb-6">
+                <div className="space-y-3 mb-7">
                   <div className="flex items-center text-sm">
-                    <FileText size={16} className="text-accent-primary mr-2" />
-                    <span className="text-text-secondary">{report.project}</span>
+                    <FileText size={14} className="text-accent-primary mr-2.5 opacity-70" />
+                    <span className="text-text-secondary text-xs">{report.project}</span>
                   </div>
                   <div className="flex items-center text-sm">
-                    <User size={16} className="text-accent-primary mr-2" />
-                    <span className="text-text-secondary">{report.author}</span>
+                    <User size={14} className="text-accent-primary mr-2.5 opacity-70" />
+                    <span className="text-text-secondary text-xs">{report.author}</span>
                   </div>
                   <div className="flex items-center text-sm">
-                    <Calendar size={16} className="text-accent-primary mr-2" />
-                    <span className="text-text-secondary">{formatDate(report.createdAt)}</span>
+                    <Calendar size={14} className="text-accent-primary mr-2.5 opacity-70" />
+                    <span className="text-text-secondary text-xs">{formatDate(report.createdAt)}</span>
                   </div>
                 </div>
                 
                 <Link 
                   href={`/reports/${report.id}`}
-                  className="btn-primary w-full text-center"
+                  className="btn-primary w-full text-center text-sm font-medium inline-flex items-center justify-center gap-2"
                 >
-                  View Report
+                  View Report <ArrowRight size={14} />
                 </Link>
               </div>
             ))}
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </div>
   );
 } 
